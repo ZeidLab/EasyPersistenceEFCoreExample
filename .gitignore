@@ -260,3 +260,5 @@ FodyWeavers.xsd
 *.msix
 *.msm
 *.msp
+
+.containers/

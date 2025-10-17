@@ -1,0 +1,25 @@
+services:
+  
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    # user: root
+    container_name: tod-list-sqlserver
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=Test@Pass12345
+      - MSSQL_PID=Developer
+    ports:
+      - "124:1433"
+    # volumes:
+      # - ./.containers/sqlserver-data:/var/opt/mssql
+      # - sqlserver-data:/var/opt/mssql
+    restart: unless-stopped
+    healthcheck:
+      test: [ "CMD-SHELL", "/opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P Test@Pass12345 -Q 'SELECT 1'" ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 80s
+
+# volumes:
+#   sqlserver-data:
