@@ -10,8 +10,9 @@ public class TodoItemConfig : IEntityTypeConfiguration<TodoItem>
     {
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Title).IsRequired().HasMaxLength(200);
+       
         builder.HasOne(x => x.Category)
-            .WithMany(c => c.TodoItems)
+            .WithMany(x => x.TodoItems)
             .HasForeignKey(x => x.CategoryId)
             .OnDelete(DeleteBehavior.Restrict);
     }
